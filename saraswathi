@@ -1,0 +1,65 @@
+# Ice Cream Parlour Ordering System
+
+class IceCreamParlour:
+    def __init__(self):
+        self.flavors = {
+            "Vanilla": 2.50,
+            "Chocolate": 3.00,
+            "Strawberry": 2.75,
+            "Mint": 3.25,
+            "Coffee": 3.50
+        }
+        self.toppings = {
+            "Chocolate Chips": 0.50,
+            "Sprinkles": 0.75,
+            "Whipped Cream": 1.00,
+            "Nuts": 1.25,
+            "Cherries": 0.50
+        }
+
+    def show_menu(self):
+        print("Welcome to the Ice Cream Parlour!")
+        print("\nFlavors available:")
+        for flavor, price in self.flavors.items():
+            print(f"{flavor}: ${price:.2f}")
+        
+        print("\nToppings available:")
+        for topping, price in self.toppings.items():
+            print(f"{topping}: ${price:.2f}")
+
+    def take_order(self):
+        total = 0
+        order_flavor = input("\nPlease select your ice cream flavor (type the name): ")
+        
+        # Check if flavor is valid
+        if order_flavor in self.flavors:
+            total += self.flavors[order_flavor]
+            print(f"{order_flavor} added to your order. Price: ${self.flavors[order_flavor]:.2f}")
+        else:
+            print("Sorry, that flavor is not available.")
+            return
+        
+        more_toppings = 'y'
+        while more_toppings.lower() == 'y':
+            topping = input("Would you like to add a topping? (type the topping name or 'no' to skip): ")
+            if topping == 'no':
+                break
+            elif topping in self.toppings:
+                total += self.toppings[topping]
+                print(f"{topping} added to your order. Price: ${self.toppings[topping]:.2f}")
+            else:
+                print("Sorry, that topping is not available.")
+            
+            more_toppings = input("Would you like to add another topping? (y/n): ")
+
+        print(f"\nYour total is: ${total:.2f}")
+        print("Thank you for your order!")
+
+# Create an instance of IceCreamParlour
+parlour = IceCreamParlour()
+
+# Display the menu
+parlour.show_menu()
+
+# Take order
+parlour.take_order()
